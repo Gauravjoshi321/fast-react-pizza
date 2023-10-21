@@ -8,7 +8,7 @@ function Menu() {
 
   return (
     <div>
-      {menu.map(pizza => <MenuItem pizza={pizza} />)}
+      {menu.map(pizza => <MenuItem pizza={pizza} key={pizza.name} />)}
     </div>
   );
 }
