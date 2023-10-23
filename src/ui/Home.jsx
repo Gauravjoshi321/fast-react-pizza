@@ -1,6 +1,9 @@
+import SearchOrder from "../features/order/searchOrder";
+
 function Home() {
   return (
     <div>
+      <SearchOrder />
       <h1>
         The best pizza.
         <br />
