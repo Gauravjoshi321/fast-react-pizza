@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Form, redirect } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 
@@ -91,9 +90,7 @@ export async function action({ request }) {
     cart: JSON.parse(obj.cart)
   }
 
-  console.log(order);
   const newOrder = await createOrder(order);
-  console.log(newOrder);
 
   return redirect(`/order/${newOrder.id}`);
 }
