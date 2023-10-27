@@ -9,11 +9,13 @@ function AppLayout() {
 
 
   return (
-    <div className="layout">
+    <div className="grid grid-rows-[auto_1fr_auto] h-screen">
       {loading && <Loader />}
       <Header />
 
-      <Outlet />
+      <main className="overflow-scroll">
+        <Outlet />
+      </main>
 
       <CartOverview />
     </div>
