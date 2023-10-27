@@ -9,7 +9,7 @@ function CreateUser() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p className='text-sm md:text-base'>👋 Welcome! Please start by telling us your name:</p>
+      <p className='text-sm md:text-base mb-4'>👋 Welcome! Please start by telling us your name:</p>
 
       <input
         type="text"
