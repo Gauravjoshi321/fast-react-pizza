@@ -8,7 +8,7 @@ function CartOverview() {
         <span>$23.45</span>
       </p>
       <Link to="/cart">Open cart &rarr;</Link>
-    </div>
+    </div >
   );
 }
 
