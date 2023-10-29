@@ -62,7 +62,12 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input
+              type="text"
+              name="address"
+              required
+              className="w-full md:px-6 md:py-3 rounded-full px-4 py-2 border border-stone-300 focus:outline-none focus:ring focus:ring-yellow-400"
+            />
           </div>
         </div>
 
@@ -71,6 +76,7 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
+            className="accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1"
           // value={withPriority}
           // onChange={(e) => setWithPriority(e.target.checked)}
           />

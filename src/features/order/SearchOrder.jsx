@@ -21,13 +21,13 @@ function SearchOrder() {
         onChange={(e) => setQuery(e.target.value)}
         className="
           w-28
-          rounded-full 
-          px-3 py-2 
           text-sm 
-          placeholder:text-stone-500 
-          bg-yellow-100 
-          focus:outline-none focus:ring focus:ring-yellow-600 focus:ring-opacity-20 sm:focus:w-72 transition-all duration-300
           sm:w-56
+          px-3 py-2 
+          rounded-full 
+          bg-yellow-100 
+          placeholder:text-stone-500 
+          focus:outline-none focus:ring focus:ring-yellow-600 focus:ring-opacity-20 sm:focus:w-72 transition-all duration-300
           "
       />
     </form>
