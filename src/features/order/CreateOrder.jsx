@@ -66,7 +66,7 @@ function CreateOrder() {
               type="text"
               name="address"
               required
-              className="w-full md:px-6 md:py-3 rounded-full px-4 py-2 border border-stone-300 focus:outline-none focus:ring focus:ring-yellow-400"
+              className="input"
             />
           </div>
         </div>
