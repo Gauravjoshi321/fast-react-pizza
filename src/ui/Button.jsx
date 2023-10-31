@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom"
 
-function Button({ children, disabled, to }) {
-  const className = "py-3 px-4 font-semibold text-stone-900 bg-yellow-400 hover:bg-yellow-300 transition-colors duration-300 tracking-wide uppercase rounded-full focus: outline-none focus:ring focus: ring-yellow-300 focus: ring-offset-2 sm:px-6 sm:py-4"
+function Button({ children, disabled, to, type }) {
+
+  const base = "font-semibold text-stone-900 bg-yellow-400 hover:bg-yellow-300 transition-colors duration-300 tracking-wide uppercase rounded-full focus: outline-none focus:ring focus: ring-yellow-300 focus: ring-offset-2"
+
+  const style = {
+    primary: base + " py-3 px-4 md:px-6 md:py-4",
+    small: base + " py-2 px-4 md:px-5 md:py-2.5 text-xs"
+  }
 
   if (to) return (
-    <Link to={to} className={className}>{children}</Link>
+    <Link to={to} className={style[type]}>{children}</Link>
   )
 
   return (
-    <button className={className} disabled={disabled}>
+    <button className={style[type]} disabled={disabled}>
       {children}
     </button>
   )
