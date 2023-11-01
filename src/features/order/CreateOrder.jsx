@@ -42,37 +42,36 @@ function CreateOrder() {
   const cart = fakeCart;
 
   return (
-    <div>
-      <h2>Ready to order? Let's go!</h2>
+    <div className="px-4 py-4">
+      <h2 className="font-bold mb-6">Ready to order? Let's go!</h2>
 
       {/* <Form method="POST" action="/order/new"> */}
-      <Form method="POST">
-        <div>
-          <label>First Name</label>
-          <input type="text" name="customer" required className="input" />
+      <Form method="POST" className="flex flex-col gap-4">
+
+        <div className="flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0">
+          <label className="sm:basis-40">First Name</label>
+          <input type="text" name="customer" required className="input sm:grow" />
         </div>
 
         <div>
-          <label>Phone number</label>
-          <div>
-            <input type="tel" name="phone" maxLength="10" required minLength="10" className="input" />
+          <div className="flex flex-col sm:items-center justify-between sm:flex-row gap-2 sm:gap-0">
+            <label className="sm:basis-40">Phone number</label>
+            <input type="tel" name="phone" maxLength="10" required minLength="10" className="input sm:grow" />
           </div>
           {formErrors?.phone && <p>{formErrors.phone}</p>}
         </div>
 
-        <div>
-          <label>Address</label>
-          <div>
-            <input
-              type="text"
-              name="address"
-              required
-              className="input"
-            />
-          </div>
+        <div className="flex flex-col sm:items-center justify-between sm:flex-row gap-2 sm:gap-0">
+          <label className="sm:basis-40">Address</label>
+          <input
+            type="text"
+            name="address"
+            required
+            className="input sm:grow"
+          />
         </div>
 
-        <div>
+        <div className="mt-6 mb-3 flex gap-3">
           <input
             type="checkbox"
             name="priority"
@@ -81,12 +80,12 @@ function CreateOrder() {
           // value={withPriority}
           // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label htmlFor="priority" className="font-semibold">Want to yo give your order priority?</label>
         </div>
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <Button disabled={isSubmitting}>
+          <Button disabled={isSubmitting} type="primary">
             {isSubmitting ? "Placing Order..." : "Order now"}
           </Button>
         </div>

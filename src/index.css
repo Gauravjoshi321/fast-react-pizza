@@ -5,7 +5,7 @@
 
 @layer components{
   .input{
-    @apply w-full md:px-6 md:py-3 rounded-full px-4 py-2 border border-stone-300 focus:outline-none focus:ring focus:ring-yellow-400
+    @apply md:px-6 md:py-3 rounded-full px-4 py-2 border border-stone-300 focus:outline-none focus:ring focus:ring-yellow-400
   }
 
   /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
