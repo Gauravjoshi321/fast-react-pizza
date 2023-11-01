@@ -44,7 +44,7 @@ function Order() {
         <p className="text-xs text-stone-600">(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
 
-      <ul className="mb-8">
+      <ul className="mb-12 flex flex-col gap-4">
         {cart.map(item => <OrderItem item={item} key={item.pizzaId} />)}
       </ul>
 

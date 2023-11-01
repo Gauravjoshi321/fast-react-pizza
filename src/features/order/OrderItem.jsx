@@ -4,13 +4,13 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 
   return (
-    <li className="border-t border-b divide-y">
-      <div className="">
-        <p>
-          <span>{quantity}&times;</span> {name}
+    <li className="border-b divide-y">
+      <div className="flex justify-between">
+        <p className="text-sm">
+          <span className="font-semibold">{quantity}&times;</span> {name}
         </p>
 
-        <p>{formatCurrency(totalPrice)}</p>
+        <p className="text-sm font-semibold">{formatCurrency(totalPrice)}</p>
       </div>
 
     </li>
