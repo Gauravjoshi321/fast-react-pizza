@@ -41,6 +41,9 @@ function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
+  const itemStyle = "flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0";
+  const checkBox = "accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1";
+
   return (
     <div className="px-4 py-4">
       <h2 className="font-bold mb-6">Ready to order? Let's go!</h2>
@@ -48,20 +51,24 @@ function CreateOrder() {
       {/* <Form method="POST" action="/order/new"> */}
       <Form method="POST" className="flex flex-col gap-4">
 
-        <div className="flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0">
+        <div className={itemStyle}>
           <label className="sm:basis-40">First Name</label>
           <input type="text" name="customer" required className="input sm:grow" />
         </div>
 
-        <div>
-          <div className="flex flex-col sm:items-center justify-between sm:flex-row gap-2 sm:gap-0">
-            <label className="sm:basis-40">Phone number</label>
-            <input type="tel" name="phone" maxLength="10" required minLength="10" className="input sm:grow" />
+        <div className="sm:flex sm:items-center">
+          <label className="sm:basis-40">Phone number</label>
+
+          <div className={`${itemStyle} sm:flex sm:flex-col sm:grow`}>
+            <input type="tel" name="phone" maxLength="10" required minLength="10" className="input w-full" />
+
+            {formErrors?.phone && <p className="text-xs p-2 my-1 text-red-800 bg-red-100 rounded-lg sm:w-full w-[297px]">{formErrors.phone}</p>}
           </div>
-          {formErrors?.phone && <p>{formErrors.phone}</p>}
+
+
         </div>
 
-        <div className="flex flex-col sm:items-center justify-between sm:flex-row gap-2 sm:gap-0">
+        <div className={itemStyle}>
           <label className="sm:basis-40">Address</label>
           <input
             type="text"
@@ -76,7 +83,7 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            className="accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1"
+            className={checkBox}
           // value={withPriority}
           // onChange={(e) => setWithPriority(e.target.checked)}
           />
@@ -107,7 +114,7 @@ export async function action({ request }) {
   const errors = {};
 
   if (!isValidPhone(order.phone)) {
-    errors.phone = "Please provide a correct Mobile number. We might need it to contact you while delivering the order.";
+    errors.phone = "Please provide a correct Mobile number.";
   }
 
   if (Object.keys(errors).length > 0) return errors;
