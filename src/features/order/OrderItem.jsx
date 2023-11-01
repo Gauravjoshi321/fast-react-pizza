@@ -5,7 +5,7 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
 
   return (
     <li className="border-b divide-y">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-2">
         <p className="text-sm">
           <span className="font-semibold">{quantity}&times;</span> {name}
         </p>
