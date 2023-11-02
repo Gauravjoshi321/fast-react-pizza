@@ -13,7 +13,13 @@ function Home() {
         Straight out of the oven, straight to you.
       </h1>
 
-      {userName === "" ? <CreateUser /> : <Button type="primary" to="/menu">Start ordering, {userName}</Button>}
+      {
+        userName === ""
+          ? <CreateUser />
+          : <Button type="primary" to="/menu">
+            Start ordering, {userName}
+          </Button>
+      }
     </div>
   );
 }
