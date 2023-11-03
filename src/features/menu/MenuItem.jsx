@@ -1,8 +1,24 @@
+import { useDispatch } from "react-redux";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
+import { addItem } from "../cart/cartSlice";
 
 function MenuItem({ pizza }) {
+  const dispatch = useDispatch();
+
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+
+  function handleClick() {
+    const item = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1
+    }
+
+    dispatch(addItem(item));
+  }
 
   return (
     <li className="flex p-2 gap-4">
@@ -21,7 +37,7 @@ function MenuItem({ pizza }) {
 
           {
             !soldOut
-            && <Button type={"small"}>Add To Cart</Button>
+            && <Button onClick={handleClick} type={"small"}>Add To Cart</Button>
           }
         </div>
 
