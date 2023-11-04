@@ -53,3 +53,7 @@ export const totalPrice = state =>
   state.cart.cart.reduce((sum, item) => {
     return sum + item.totalPrice
   }, 0)
+
+
+export const getCart = state => state.cart.cart;
+export const getUserName = state => state.user.userName;
