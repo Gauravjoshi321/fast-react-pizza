@@ -1,6 +1,6 @@
 import { formatCurrency } from "../../utils/helpers";
 import DeleteItem from "./DeleteItem";
-import UpdateItemQuantity from './UpdateItemQuantity'
+import UpdateItemQuantity from './updateItemQuantity'
 
 function CartItem({ item }) {
   const { pizzaId, name, quantity, totalPrice } = item;
