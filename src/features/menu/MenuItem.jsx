@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../ui/Button";
 import { formatCurrency } from "../../utils/helpers";
-import { addItem, removeItem } from "../cart/cartSlice";
+import { addItem, getItemQuantity } from "../cart/cartSlice";
 import DeleteItem from "../cart/DeleteItem";
 
 function MenuItem({ pizza }) {
@@ -20,9 +20,7 @@ function MenuItem({ pizza }) {
 
     dispatch(addItem(item));
   }
-  const itemQuantity = useSelector(state =>
-    state.cart.cart.find(item =>
-      item.pizzaId === id))?.quantity ?? 0
+  const itemQuantity = useSelector(getItemQuantity(id));
 
 
   return (

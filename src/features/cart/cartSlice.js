@@ -57,3 +57,9 @@ export const totalPrice = state =>
 
 export const getCart = state => state.cart.cart;
 export const getUserName = state => state.user.userName;
+
+export const getItemQuantity = function (id) {
+  return function (state) {
+    return state.cart.cart.find(item => item.pizzaId === id)?.quantity ?? 0
+  }
+}
