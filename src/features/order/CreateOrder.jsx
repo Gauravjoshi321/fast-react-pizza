@@ -1,8 +1,11 @@
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../cart/cartSlice";
+import { useSelector } from "react-redux";
+import { clearCart, getCart, totalPrice } from "../cart/cartSlice";
+import EmptyCart from "../cart/EmptyCart";
+import store from "../../store";
+import { useState } from "react";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -35,18 +38,22 @@ const isValidPhone = (str) =>
 // ];
 
 function CreateOrder() {
+  const [withPriority, setWithPriority] = useState(false);
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   const formErrors = useActionData();
 
-  // const [withPriority, setWithPriority] = useState(false);
-  const cart = useSelector(getCart());
+  const cart = useSelector(getCart);
+  const finalPrice = useSelector(totalPrice);
 
   const itemStyle = "flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0";
   const checkBox = "accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1";
 
   const userName = useSelector(state => state.user.userName);
+
+  if (cart.length < 1) return <EmptyCart />;
 
   return (
     <div className="px-4 py-4">
@@ -88,8 +95,8 @@ function CreateOrder() {
             name="priority"
             id="priority"
             className={checkBox}
-          // value={withPriority}
-          // onChange={(e) => setWithPriority(e.target.checked)}
+            value={withPriority}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority" className="font-semibold">Want to yo give your order priority?</label>
         </div>
@@ -97,7 +104,7 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button disabled={isSubmitting} type="primary">
-            {isSubmitting ? "Placing Order..." : "Order now"}
+            {isSubmitting ? "Placing Order..." : withPriority ? `Order now: pay ${finalPrice + Math.floor(finalPrice * 0.2)}` : `Order now: pay ${finalPrice}`}
           </Button>
         </div>
       </Form>
@@ -111,7 +118,7 @@ export async function action({ request }) {
 
   const order = {
     ...obj,
-    priority: obj.priority === "on",
+    priority: obj.priority === "true",
     cart: JSON.parse(obj.cart)
   }
 
@@ -125,6 +132,9 @@ export async function action({ request }) {
 
   // If there are no errors then only create a new order and redirect the page accordingly.
   const newOrder = await createOrder(order);
+
+  // DO NOT OVERUSE IT... IT CAN MAKE THINGS AGAINST REDUX (IT WAS IN PREVIOUS REDUX, DIRECTLY USING DISPATCH ON THE STORE)
+  store.dispatch(clearCart());
 
   return redirect(`/order/${newOrder.id}`);
 }
