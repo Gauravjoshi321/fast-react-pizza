@@ -25,6 +25,8 @@ function CreateOrder() {
 
   const cart = useSelector(getCart);
   const finalPrice = useSelector(totalPrice);
+  const { status, position, address, error } = useSelector(state => state.user)
+  console.log(address);
 
   const itemStyle = "flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0";
   const checkBox = "accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1";
@@ -37,8 +39,6 @@ function CreateOrder() {
   return (
     <div className="px-4 py-4">
       <h2 className="font-bold mb-6">Ready to order? Let's go!</h2>
-
-      <button onClick={() => dispatch(fetchAddress())}>get position</button>
 
       {/* <Form method="POST" action="/order/new"> */}
       <Form method="POST" className="flex flex-col gap-4">
@@ -56,18 +56,24 @@ function CreateOrder() {
 
             {formErrors?.phone && <p className="text-xs p-2 my-1 text-red-800 bg-red-100 rounded-lg sm:w-full w-[297px]">{formErrors.phone}</p>}
           </div>
-
-
         </div>
 
-        <div className={itemStyle}>
+
+        <div className={`${itemStyle} relative`}>
           <label className="sm:basis-40">Address</label>
           <input
             type="text"
             name="address"
             required
+            defaultValue={address}
             className="input sm:grow"
           />
+          <span className="absolute z-50 sm:right-[5px] sm:top-[5px] right-[5px] top-[37px]">
+            <Button type="small" onClick={(e) => {
+              e.preventDefault();
+              dispatch(fetchAddress())
+            }}>get position</Button>
+          </span>
         </div>
 
         <div className="mt-6 mb-3 flex gap-3">
