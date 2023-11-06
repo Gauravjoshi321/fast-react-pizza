@@ -2,6 +2,7 @@ import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../cart/cartSlice";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -40,7 +41,7 @@ function CreateOrder() {
   const formErrors = useActionData();
 
   // const [withPriority, setWithPriority] = useState(false);
-  const cart = useSelector(state => state.cart.cart);
+  const cart = useSelector(getCart());
 
   const itemStyle = "flex flex-col justify-between sm:items-center sm:flex-row gap-2 sm:gap-0";
   const checkBox = "accent-yellow-400 h-6 w-6 focus-outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-1";
