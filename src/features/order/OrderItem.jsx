@@ -3,9 +3,10 @@ import { formatCurrency } from "../../utils/helpers";
 function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 
+
   return (
-    <li className="border-b divide-y">
-      <div className="flex justify-between mb-2">
+    <li className="py-3">
+      <div className="flex justify-between">
         <p className="text-sm">
           <span className="font-semibold">{quantity}&times;</span> {name}
         </p>
@@ -13,6 +14,7 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
         <p className="text-sm font-semibold">{formatCurrency(totalPrice)}</p>
       </div>
 
+      <p className="text-sm text-stone-500 italic">{isLoadingIngredients ? 'Loading...' : ingredients.join(', ')}</p>
     </li>
   );
 }

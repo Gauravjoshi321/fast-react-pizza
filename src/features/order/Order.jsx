@@ -23,8 +23,6 @@ function Order() {
 
   }, [fetcher])
 
-  console.log(fetcher);
-
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
     id,
@@ -58,12 +56,13 @@ function Order() {
         <p className="text-xs text-stone-600">(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
 
-      <ul className="mb-12 flex flex-col gap-4">
+      <ul className="mb-12 flex flex-col gap-2 divide-y border-b">
         {cart.map(item => (
           <OrderItem
             item={item}
             key={item.pizzaId}
-          // ingredients={fetcher.data}
+            isLoadingIngredients={fetcher.state === 'loading'}
+            ingredients={fetcher?.data?.find(el => el.id === item.pizzaId)?.ingredients ?? []}
           />
         )
         )}
