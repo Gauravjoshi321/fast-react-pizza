@@ -1,6 +1,6 @@
 // Test ID: IIDSAT
 
-import { useLoaderData } from "react-router-dom";
+import { useFetcher, useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
@@ -8,10 +8,23 @@ import {
   formatDate,
 } from "../../utils/helpers";
 import OrderItem from "./OrderItem";
+import { useEffect } from "react";
 
 
 function Order() {
   const order = useLoaderData();
+  const fetcher = useFetcher();
+
+  useEffect(function () {
+    // On mounting, this method will fetch the API data which we are asking for in '/menu' route: This hook is provided by the react-router-dom
+
+    if (!fetcher.data && fetcher.state === 'idle')
+      fetcher.load('/menu');
+
+  }, [fetcher])
+
+  console.log(fetcher);
+
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
     id,
@@ -22,6 +35,7 @@ function Order() {
     estimatedDelivery,
     cart,
   } = order;
+
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
@@ -45,7 +59,14 @@ function Order() {
       </div>
 
       <ul className="mb-12 flex flex-col gap-4">
-        {cart.map(item => <OrderItem item={item} key={item.pizzaId} />)}
+        {cart.map(item => (
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+          // ingredients={fetcher.data}
+          />
+        )
+        )}
       </ul>
 
       <div className="bg-gray-200 p-3 flex gap-3 justify-between items-center flex-wrap">

@@ -82,7 +82,7 @@ function CreateOrder() {
               <Button type="small" onClick={(e) => {
                 e.preventDefault();
                 dispatch(fetchAddress())
-              }}>get position
+              }}>{status === "loading" ? "fetching..." : "get position"}
               </Button>
             </span>
           }
