@@ -79,7 +79,7 @@ function Order() {
         <p className="text-sm font-semibold">To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
 
-      <UpdateOrder />
+      {!priority && <UpdateOrder />}
     </div >
   );
 }
