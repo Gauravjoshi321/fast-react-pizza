@@ -1,18 +1,21 @@
-import { Form, useFetcher } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 import Button from "../../ui/Button";
+import { updateOrder } from "../../services/apiRestaurant";
 
 function UpdateOrder() {
-  // const fetcher = useFetcher();
+  const fetcher = useFetcher();
 
   return (
-    <Form method="PATCH" className="text-right mt-4">
+    <fetcher.Form method="PATCH" className="text-right mt-4">
       <Button type="small">Make Priority</Button>
-    </Form>
+    </fetcher.Form>
   )
 }
 
-export const action = function ({ request, params }) {
-  console.log('update');
+export const action = async function ({ request, params }) {
+  const updatedObj = { priority: true };
+
+  await updateOrder(params.orderId, updatedObj);
 
   return null;
 }
